@@ -1,0 +1,9 @@
+﻿  Copying resources for CocosTest ...
+  Building Custom Rule D:/00_git_update/01_Study/03_Cocos2d/CocosTest/CMakeLists.txt
+      copying to D:/00_git_update/01_Study/03_Cocos2d/CocosTest/proj.win32/bin/CocosTest/Debug/Resources
+    Create D:/00_git_update/01_Study/03_Cocos2d/CocosTest/proj.win32/bin/CocosTest/Debug/Resources\fonts\Marker Felt.ttf
+    Create D:/00_git_update/01_Study/03_Cocos2d/CocosTest/proj.win32/bin/CocosTest/Debug/Resources\HelloWorld.png
+    Create D:/00_git_update/01_Study/03_Cocos2d/CocosTest/proj.win32/bin/CocosTest/Debug/Resources\res\.gitkeep
+    ...
+    0 items updated, 6 items created 
+    takes 0.04188823699951172 seconds

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Classes\AppDelegate.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Classes\HelloWorldScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\main.cpp">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\cocos2d\cocos\precheader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Classes\AppDelegate.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Classes\HelloWorldScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\main.h">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\resource.h">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\CloseNormal.png">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\CloseSelected.png">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\HelloWorld.png">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\fonts\Marker Felt.ttf">
+      <Filter>Resources\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\fonts\arial.ttf">
+      <Filter>Resources\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\res\.gitkeep">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\game.rc">
+      <Filter>Source Files\proj.win32</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{6BFA7958-445E-3ECD-9174-404DB0EC441F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\fonts">
+      <UniqueIdentifier>{BD62B3DD-12B5-3D6C-A87A-FFE012FDC72C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\res">
+      <UniqueIdentifier>{62ACCE0B-E512-3DA5-BFB8-4F9306CCC593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2A8F5AE5-7B3A-34A5-ACE5-1890A2BC8EAD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes">
+      <UniqueIdentifier>{F16CBB7A-161C-3AC2-BA89-3A54D2FFA429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\proj.win32">
+      <UniqueIdentifier>{6112FBA5-207B-3ECC-A2D7-7C7D1C779867}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
