@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\Debug\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\Debug\SYNC_RESOURCE-CocosTest</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\bin\CocosTest\Debug\CocosTest.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\Debug\ALL_BUILD</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

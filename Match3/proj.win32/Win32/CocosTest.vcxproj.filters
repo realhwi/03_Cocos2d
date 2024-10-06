@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Classes\AppDelegate.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Classes\HelloWorldScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\main.cpp">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\cocos2d\cocos\precheader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Classes\AppDelegate.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Classes\HelloWorldScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\main.h">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\resource.h">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\CloseNormal.png">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\CloseSelected.png">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\HelloWorld.png">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\fonts\0404b20.png">
+      <Filter>Resources\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\fonts\04b20.ttf">
+      <Filter>Resources\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\fonts\Marker Felt.ttf">
+      <Filter>Resources\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\fonts\arial.ttf">
+      <Filter>Resources\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\fonts\freefontsdownload.txt">
+      <Filter>Resources\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\fonts\www.freefontsdownload.net.url">
+      <Filter>Resources\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\res\.gitkeep">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\res\btn_disabled.png">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\res\btn_down.png">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\res\btn_up.png">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\res\checkbox_background.png">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\res\checkbox_checked.png">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\res\checkbox_checked_disabled.png">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\res\checkbox_disabled.png">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\res\checkbox_down.png">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\Resources\res\editbox_background.png">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\00_git_update\01_Study\03_Cocos2d\CocosTest\proj.win32\game.rc">
+      <Filter>Source Files\proj.win32</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{419D799E-60BA-3E94-9033-F88808A0F6B6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\fonts">
+      <UniqueIdentifier>{B906F172-1EB4-3EF6-ABCB-2D46A3DE501F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\res">
+      <UniqueIdentifier>{DFA4E0FE-4C5A-34A1-8F75-343F4E981ECA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{A03E41B4-705B-3B7B-95E8-A37CB31E5CCE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes">
+      <UniqueIdentifier>{EBF2A9F0-00BB-37C7-AD74-A64E37CDB1B0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\proj.win32">
+      <UniqueIdentifier>{D6EC7884-A3B3-36A0-85C7-5E446EECA52C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
