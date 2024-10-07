@@ -1,9 +1,2 @@
 ﻿  Copying resources for Match3 ...
-  Building Custom Rule D:/00_git_update/01_Study/03_Cocos2d/Match3/CMakeLists.txt
       copying to D:/00_git_update/01_Study/03_Cocos2d/Match3/proj.win32/bin/Match3/Debug/Resources
-    Create D:/00_git_update/01_Study/03_Cocos2d/Match3/proj.win32/bin/Match3/Debug/Resources\fonts\Marker Felt.ttf
-    Create D:/00_git_update/01_Study/03_Cocos2d/Match3/proj.win32/bin/Match3/Debug/Resources\HelloWorld.png
-    Create D:/00_git_update/01_Study/03_Cocos2d/Match3/proj.win32/bin/Match3/Debug/Resources\res\.gitkeep
-    ...
-    0 items updated, 6 items created 
-    takes 0.04651021957397461 seconds

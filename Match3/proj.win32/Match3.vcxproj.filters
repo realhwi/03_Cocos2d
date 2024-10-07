@@ -7,6 +7,12 @@
     <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\Match3\Classes\HelloWorldScene.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
+    <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\Match3\Classes\SceneIngame.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\Match3\Classes\stdafx.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
     <ClCompile Include="D:\00_git_update\01_Study\03_Cocos2d\Match3\proj.win32\main.cpp">
       <Filter>Source Files\proj.win32</Filter>
     </ClCompile>
@@ -19,6 +25,15 @@
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\Match3\Classes\HelloWorldScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\Match3\Classes\SceneIngame.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\Match3\Classes\Environment.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\Match3\Classes\stdafx.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\Match3\proj.win32\main.h">
@@ -43,6 +58,9 @@
       <Filter>Resources\fonts</Filter>
     </ClInclude>
     <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\Match3\Resources\res\.gitkeep">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\00_git_update\01_Study\03_Cocos2d\Match3\Resources\res\match3_tiles_px.png">
       <Filter>Resources\res</Filter>
     </ClInclude>
   </ItemGroup>

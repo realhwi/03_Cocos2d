@@ -1,7 +1,26 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\proj.win32\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{56BFE363-F8AA-3CBF-97D0-C38E3571D6FD}|Match3.vcxproj|D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\SceneIngame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{56BFE363-F8AA-3CBF-97D0-C38E3571D6FD}|Match3.vcxproj|D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\SceneIngame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{56BFE363-F8AA-3CBF-97D0-C38E3571D6FD}|Match3.vcxproj|D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\Environment.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{56BFE363-F8AA-3CBF-97D0-C38E3571D6FD}|Match3.vcxproj|D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{56BFE363-F8AA-3CBF-97D0-C38E3571D6FD}|Match3.vcxproj|D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{56BFE363-F8AA-3CBF-97D0-C38E3571D6FD}|Match3.vcxproj|D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\stdafx.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +28,87 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CMakeLists.txt",
+              "DocumentMoniker": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\CMakeLists.txt",
+              "RelativeDocumentMoniker": "..\\CMakeLists.txt",
+              "ToolTip": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\CMakeLists.txt",
+              "RelativeToolTip": "..\\CMakeLists.txt",
+              "ViewState": "AgIAADAAAAAAAAAAAADwvz4AAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-10-07T09:20:15.762Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "stdafx.h",
+              "DocumentMoniker": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\stdafx.h",
+              "RelativeDocumentMoniker": "..\\Classes\\stdafx.h",
+              "ToolTip": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\stdafx.h",
+              "RelativeToolTip": "..\\Classes\\stdafx.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-07T06:43:38.916Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "stdafx.cpp",
+              "DocumentMoniker": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\stdafx.cpp",
+              "RelativeDocumentMoniker": "..\\Classes\\stdafx.cpp",
+              "ToolTip": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\stdafx.cpp",
+              "RelativeToolTip": "..\\Classes\\stdafx.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-07T06:43:18.823Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Environment.h",
+              "DocumentMoniker": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\Environment.h",
+              "RelativeDocumentMoniker": "..\\Classes\\Environment.h",
+              "ToolTip": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\Environment.h",
+              "RelativeToolTip": "..\\Classes\\Environment.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-07T06:41:15.46Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SceneIngame.h",
+              "DocumentMoniker": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\SceneIngame.h",
+              "RelativeDocumentMoniker": "..\\Classes\\SceneIngame.h",
+              "ToolTip": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\SceneIngame.h",
+              "RelativeToolTip": "..\\Classes\\SceneIngame.h",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADsAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-07T06:39:46.354Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SceneIngame.cpp",
+              "DocumentMoniker": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\SceneIngame.cpp",
+              "RelativeDocumentMoniker": "..\\Classes\\SceneIngame.cpp",
+              "ToolTip": "D:\\00_git_update\\01_Study\\03_Cocos2d\\Match3\\Classes\\SceneIngame.cpp",
+              "RelativeToolTip": "..\\Classes\\SceneIngame.cpp",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAAAF4AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-07T06:39:22.431Z",
+              "EditorCaption": ""
             }
           ]
         }
