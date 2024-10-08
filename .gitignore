@@ -1,0 +1,23 @@
+# 무시할 기본 파일 패턴
+*.pch
+*.lib
+.vs/
+Debug/
+ALL_BUILD/
+ZERO_CHECK/
+External/
+Internal/
+Utils/
+Resources/
+
+# 모든 파일을 무시
+*
+
+# .gitignore와 .gitattributes 파일은 무시하지 않음
+!.gitignore
+!.gitattributes
+
+# Match3 폴더와 그 내부의 Classes 폴더와 파일들을 추적
+!Match3/
+!Match3/Classes/
+!Match3/Classes/**
