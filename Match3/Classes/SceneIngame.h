@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "Environment.h"
+#include "LayerIngameUI.h"
 
 class SceneIngame: public Scene{
 private:
@@ -66,6 +67,8 @@ private:
 	void stackEmpty(); // 스택을 비워주는 역할
 	bool stackFind(Vec2 value); // 스택에 자료가 있는지 판단 
 	void judgeMatch(int x, int y); // 3매치가 이루어져있는지 판단 
+
+	LayerIngameUI* ui;
 
 	
 public:

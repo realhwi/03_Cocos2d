@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SceneIngame.h"
+#include "SceneHome.h"
 
 //x,y 위치에 블록을 생성하는 함수 
 void SceneIngame::createBlock(int x, int y, int type)
@@ -232,19 +233,20 @@ void SceneIngame::judgeMatch(int x, int y)
 			}
 		}
 	}
+	// 스택에 쌓인 블록이 1개 이상일 때 매치 처리
 	if (judgeStackCount > 1) {
+		Global::getInstance()->addScore(judgeStackCount * 10); // 매치된 블록 수에 따라 점수 추가
+		ui->setScore(Global::getInstance()->getScore()); // UI에 점수 업데이트
 		while (judgeStackCount > 0) {
-			Vec2 p = stackPop();
-			destroyBlock(p.x,p.y);
+			Vec2 p = stackPop(); // 스택에서 블록 좌표 꺼내기
+			destroyBlock(p.x, p.y); // 블록 제거
 		}
 	}
 	else {
-		state=GameState::PLAYING;
+		state = GameState::PLAYING; // 매치가 없으면 게임 상태를 PLAYING으로 설정
 	}
-	stackEmpty();
+	stackEmpty(); // 스택 비우기
 }
-
-
 
 // 장면을 생성하는 함수 
 SceneIngame* SceneIngame::create()
@@ -290,28 +292,67 @@ void SceneIngame::onEnter()
 
 void SceneIngame::initUI()
 {
-}
+	// 인게임 UI 초기화하고 UI 레이어를 현재 장면에 추가
+	addChild(ui = LayerIngameUI::create());
+	ui->setLocalZOrder(1); // UI 레이어를 다른 요소보다 위에 표시
 
-// 일정한 개수와 규칙에 맞춰 화면에 나타날 수 있게 표시 
-void SceneIngame::initGame()
-{
-	// BLOCK_HORIZONTAL과 BLOCK_VERTICAL는 블록의 가로와 세로 개수를 의미함 
-	for (int i = 0; i < BLOCK_HORIZONTAL; i++) { // 가로로 반복
-		for (int k = 0; k < BLOCK_VERTICAL; k++) { // 세로로 반복 
-			createBlock(i,k,rand()%4+1); // i, k 위치에 블록을 생성하고 랜덤하게 나오게  
+	// 일시정지 버튼 클릭했을 때 처리
+	ui->btnPause->addClickEventListener([=](Ref* r) {
+		if (state == GameState::PLAYING) { // 게임이 진행 중일 때만 일시정지 가능
+			ui->showPausePanel(); // 일시정지 패널 보여주기
+			state = GameState::PAUSED; // 게임 상태를 일시정지로 변경
 		}
-	}
-	// 블록을 화면에 맞추기 
-	this->alignBlockSprite();
+		});
+
+	// 재개 버튼 클릭했을 때 처리
+	ui->btnResume->addClickEventListener([=](Ref* r) {
+		if (state == GameState::PAUSED) { // 게임이 일시정지 상태일 때만 재개 가능
+			ui->hidePausePanel(); // 일시정지 패널 숨기기
+			state = GameState::PLAYING; // 게임 상태를 다시 플레이로 변경
+		}
+		});
+
+	// 재시작 버튼 클릭했을 때 처리
+	ui->btnRestart->addClickEventListener([=](Ref* r) {
+		if (state == GameState::PAUSED) { // 게임이 일시정지 상태일 때만 재시작 가능
+			ui->hidePausePanel(); // 일시정지 패널 숨기기
+			ui->setScore(0); // 점수 초기화
+			this->destroyGame(); // 기존 게임 상태 초기화
+			this->initGame(); // 게임 재초기화
+			this->startGame(); // 게임 시작
+			state = GameState::PLAYING; // 게임 상태를 플레이로 변경
+		}
+		});
+
+	// 홈 버튼 클릭했을 때 처리
+	ui->btnHome->addClickEventListener([=](Ref* r) {
+		if (state == GameState::PAUSED) { // 게임이 일시정지 상태일 때만 홈으로 이동 가능
+			auto scene = SceneHome::create(); // 홈 화면 장면 생성
+			auto transit = TransitionSlideInL::create(0.125f, scene); // 왼쪽에서 슬라이드 인 전환 효과 설정
+			Director::getInstance()->replaceScene(transit); // 현재 장면을 홈 화면으로 교체
+		}
+		});
 }
 
 void SceneIngame::destroyUI()
 {
 }
 
+
+// 게임을 종료할 때 블록과 점수를 초기화하는 함수
 void SceneIngame::destroyGame()
 {
+	Global::getInstance()->setScore(0); // 게임 종료 시 점수 초기화
+	for (int i = 0; i < BLOCK_HORIZONTAL; i++) { // 가로 방향으로 반복
+		for (int k = 0; k < BLOCK_VERTICAL; k++) { // 세로 방향으로 반복
+			setBlockData(i, k, 0); // 블록 데이터를 0으로 초기화
+			getBlockSprite(i, k)->removeFromParent(); // 화면에서 블록 제거
+			setBlockSprite(i, k, nullptr); // 블록 스프라이트 포인터 초기화
+		}
+	}
+	this->alignBlockSprite(); // 블록들을 화면에 맞추기
 }
+
 
 // 블록 데이터를 화면에 정갈하게 맞춰주는 함수 
 void SceneIngame::alignBlockSprite()
@@ -332,6 +373,11 @@ void SceneIngame::alignBlockSprite()
 
 bool SceneIngame::onTouchBegan(Touch* t, Event* e)
 {
+	if (state == GameState::PAUSED) {
+		// 일시정지 상태에서는 터치 입력 무시
+		return true;
+	}
+
 	Vec2 p = convertGameCoordToBlockCoord(t->getLocation());
 
 	if (state == GameState::PLAYING) {
