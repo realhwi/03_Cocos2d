@@ -69,7 +69,7 @@ void SceneIngame::destroyBlock(int x, int y)
 }
 
 //게임 화면 좌표 -> 블록 배열 좌표
-Vec2 SceneIngame::convertGameCoordToBlockCoord(Vec2 gameCoord)
+Vec2 SceneIngame::convertGameCoordToBlockCoord(const Vec2& gameCoord)
 {
 	Vec2 blockOrigin = BLOCK_OFFSET
 		- Vec2((BLOCK_HORIZONTAL * BLOCK_WIDTH) / 2, (BLOCK_VERTICAL * BLOCK_HEIGHT) / 2)
@@ -86,7 +86,7 @@ Vec2 SceneIngame::convertGameCoordToBlockCoord(Vec2 gameCoord)
 }
 
 // 블록 배열 좌표 -> 게임 화면 좌표 
-Vec2 SceneIngame::convertBlockCoordToGameCoord(Vec2 blockCoord)
+Vec2 SceneIngame::convertBlockCoordToGameCoord(const Vec2& blockCoord)
 {
 	//blockOrigin : 블록 배열의 시작 위치를 계산하는 변수
 	Vec2 blockOrigin = BLOCK_OFFSET
@@ -116,7 +116,7 @@ int SceneIngame::findFiledBlockIndex(int x, int y)
 
 void SceneIngame::dropBlock(int x)
 {
-	bool isDrop = false; // 블록이 떨어졌는지 체크 
+	bool isDrop = false; // 최상단 블록이 추가되지 않을 경우에 유효함  
 	for (int i = 0; i < BLOCK_VERTICAL; i++) {
 		int empty_y = findEmptyBlockYIndex(x, i);
 		if (empty_y == -1) continue;
@@ -126,6 +126,9 @@ void SceneIngame::dropBlock(int x)
 			// 블록이 화면 밖에서 시작해 자연스럽게 떨어지도록 위치를 설정 
 			blockSprite[empty_y][x]->setPosition(convertBlockCoordToGameCoord(Vec2(x,BLOCK_VERTICAL + 1)));
 			blockSprite[empty_y][x]->runAction(MoveTo::create(0.125f,convertBlockCoordToGameCoord(Vec2(x,empty_y))));
+			// 새로 생성된 블럭에 대해서 검사하지 않는 문제 
+			isDrop = true;
+
 			continue;
 		}
 
@@ -155,7 +158,10 @@ void SceneIngame::dropBlock(int x)
 
 	if (isDrop) {
 		for (int i = 0; i < BLOCK_VERTICAL; i++) {
-			judgeMatch(x,i);// 3개 매치 찾기 
+			// 떨어지지 않은 부분과 매치를 잡아버리는 버그 애니메이션으로 딜레이 줘서 해결 
+			this->runAction(Sequence::create(DelayTime::create(0.1),CallFunc::create([=](){
+			judgeMatch(x, i);}),
+			nullptr));
 		}
 	}
 	else {
@@ -164,7 +170,7 @@ void SceneIngame::dropBlock(int x)
 	// alignBlockSprite();
 }
 
-void SceneIngame::stackPush(Vec2 value)
+void SceneIngame::stackPush(const Vec2& value)
 {
 	if(judgeData[(int)value.y][(int)value.x]!=0) return;
 	judgeStack[judgeStackCount++] = value;
@@ -172,7 +178,7 @@ void SceneIngame::stackPush(Vec2 value)
 
 }
 
-Vec2 SceneIngame::stackPop()
+const Vec2& SceneIngame::stackPop()
 {
 	auto ret = judgeStack[--judgeStackCount];
 	judgeData[(int)ret.y][(int)ret.x] = 0;
@@ -189,7 +195,7 @@ void SceneIngame::stackEmpty()
 	}
 }
 
-bool SceneIngame::stackFind(Vec2 value)
+bool SceneIngame::stackFind(const Vec2& value)
 {
 	return judgeData[(int)value.y][(int)value.x] == 1;
 }
@@ -280,6 +286,18 @@ bool SceneIngame::init()
 	return true;
 }
 
+void SceneIngame::initGame()
+{
+	Global::getInstance()->setScore(0);
+	for (int i = 0; i < BLOCK_HORIZONTAL; i++) { // 가로로 반복
+		for (int k = 0; k < BLOCK_VERTICAL; k++) { // 세로로 반복 
+			createBlock(i, k, rand() % 4 + 1); // i, k 위치에 블록을 생성하고 랜덤하게 나오게  
+		}
+	}
+	// 블록을 화면에 맞추기 
+	this->alignBlockSprite();
+}
+
 // 장면이 화면에 나타날때 호출되는 함수 
 void SceneIngame::onEnter()
 {
@@ -301,6 +319,7 @@ void SceneIngame::initUI()
 		if (state == GameState::PLAYING) { // 게임이 진행 중일 때만 일시정지 가능
 			ui->showPausePanel(); // 일시정지 패널 보여주기
 			state = GameState::PAUSED; // 게임 상태를 일시정지로 변경
+			Global::getInstance()->playPop();
 		}
 		});
 
@@ -309,6 +328,7 @@ void SceneIngame::initUI()
 		if (state == GameState::PAUSED) { // 게임이 일시정지 상태일 때만 재개 가능
 			ui->hidePausePanel(); // 일시정지 패널 숨기기
 			state = GameState::PLAYING; // 게임 상태를 다시 플레이로 변경
+			Global::getInstance()->playPop();
 		}
 		});
 
@@ -321,6 +341,7 @@ void SceneIngame::initUI()
 			this->initGame(); // 게임 재초기화
 			this->startGame(); // 게임 시작
 			state = GameState::PLAYING; // 게임 상태를 플레이로 변경
+			Global::getInstance()->playPop();
 		}
 		});
 
@@ -330,6 +351,8 @@ void SceneIngame::initUI()
 			auto scene = SceneHome::create(); // 홈 화면 장면 생성
 			auto transit = TransitionSlideInL::create(0.125f, scene); // 왼쪽에서 슬라이드 인 전환 효과 설정
 			Director::getInstance()->replaceScene(transit); // 현재 장면을 홈 화면으로 교체
+			Global::getInstance()->playPop();
+
 		}
 		});
 }
@@ -402,6 +425,7 @@ void SceneIngame::onTouchEnded(Touch* t, Event* e)
 
 void SceneIngame::startGame()
 {
+	Global::getInstance()->playBackgroundMusic();
 }
 
 void SceneIngame::pauseGame()

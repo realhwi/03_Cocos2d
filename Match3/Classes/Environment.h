@@ -33,6 +33,7 @@ class Global {
 private:
 	Global() {} // private 생성자 - 외부에서 객체 생성을 막기 위해 사용
 	long long score = 0; // 게임 점수를 저장하는 변수
+	int backgroundMusicId = -1;
 
 public:
 	static Global* getInstance(); // Global 클래스의 인스턴스를 반환하는 정적 함수 (싱글톤 패턴 구현)
@@ -40,6 +41,10 @@ public:
 	void setScore(long long value); // 점수를 설정하는 함수
 	long long getScore(); // 현재 점수를 반환하는 함수
 	void addScore(long long value); // 현재 점수에 값을 더하는 함수
+
+	void playPop();
+	void playBackgroundMusic();
+	void stopBackgroundMusic();
 };
 
 #endif 

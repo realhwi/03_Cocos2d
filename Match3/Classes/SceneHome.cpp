@@ -56,16 +56,21 @@ bool SceneHome::init()
     btnStart->setTitleText("Start Game");
     btnQuit->setTitleText("Quit Game");
 
+    Global::getInstance()->stopBackgroundMusic();
+
     // 게임 시작 버튼 클릭 이벤트 리스너 추가
     btnStart->addClickEventListener([=](Ref* r) {
         auto scene = SceneIngame::create(); // 인게임 장면 생성
         auto transit = TransitionSlideInR::create(0.125f, scene); // 오른쪽에서 슬라이드 인 전환 효과 설정
         Director::getInstance()->replaceScene(transit); // 현재 장면을 인게임 장면으로 교체
+        Global::getInstance()->playPop(); // 버튼을 누를때 사운드 재생 
         });
 
     // 게임 종료 버튼 클릭 이벤트 리스너 추가
     btnQuit->addClickEventListener([=](Ref* r) {
+        Global::getInstance()->playPop(); // 버튼을 누를 때 사운드 재생 
         Director::getInstance()->end(); // 애플리케이션 종료
         });
+
     return true;
 }

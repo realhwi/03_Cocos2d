@@ -45,11 +45,11 @@ private:
 	// 게임 좌표를 블록 좌표로 변환하는 함수 
 	// gameCoord : 게임 내 실제 좌표 (픽셀단위)
 	// 반환 값 : 해당 좌표에 대응하는 블록 위치 좌표 
-	Vec2 convertGameCoordToBlockCoord(Vec2 gameCoord);
+	Vec2 convertGameCoordToBlockCoord(const Vec2& gameCoord);
 	// 블록 좌표를 게임 좌표로 변환하는 함수 
 	// blockCoord : 블록의 위치 좌표 (블록단위)
 	// 반환 값 : 해당 게임 내 실제 좌표에서 어디에 해당하는지 반환 
-	Vec2 convertBlockCoordToGameCoord(Vec2 blockCoord);
+	Vec2 convertBlockCoordToGameCoord(const Vec2& blockCoord);
 
 	// 아래에서부터 찾아 올라가면서 비어있는 블록을 찾고
 	// -1이 리턴이 되면 비어있는 블록이 없다는 뜻이다. 
@@ -62,10 +62,10 @@ private:
 	// 블록을 떨어뜨리는 함수 
 	void dropBlock(int x);
 
-	void stackPush(Vec2 value); //stack에 자료를 집어넣는 함수
-	Vec2 stackPop(); // 스택에서 자료를 빼오는 함수
+	void stackPush(const Vec2& value); //stack에 자료를 집어넣는 함수
+	const Vec2& stackPop(); // 스택에서 자료를 빼오는 함수
 	void stackEmpty(); // 스택을 비워주는 역할
-	bool stackFind(Vec2 value); // 스택에 자료가 있는지 판단 
+	bool stackFind(const Vec2& value); // 스택에 자료가 있는지 판단 
 	void judgeMatch(int x, int y); // 3매치가 이루어져있는지 판단 
 
 	LayerIngameUI* ui;

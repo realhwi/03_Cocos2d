@@ -29,3 +29,20 @@ void Global::addScore(long long value)
 {
     this->score += value; // 전달받은 값을 현재 점수에 더함
 }
+
+void Global::playPop()
+{
+    AudioEngine::play2d("res/pop.mp3");
+}
+
+void Global::playBackgroundMusic()
+{
+    this->backgroundMusicId = AudioEngine::play2d("res/Attic Secrets.mp3",true,0.5); 
+    //음원 반복 
+}
+
+void Global::stopBackgroundMusic()
+{
+    if(backgroundMusicId==-1) return; 
+    AudioEngine::stop(this->backgroundMusicId); //인게임에서만 재생, 홈화면에선 stop 
+}
