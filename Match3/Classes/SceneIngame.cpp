@@ -277,8 +277,8 @@ bool SceneIngame::init()
 
 	auto touch = EventListenerTouchOneByOne::create();
 	touch->onTouchBegan = std::bind(&SceneIngame::onTouchBegan, this, std::placeholders::_1, std::placeholders::_2);
-	touch->onTouchMoved = std::bind(&SceneIngame::onTouchMoved, this, std::placeholders::_1, std::placeholders::_2);
-	touch->onTouchEnded = std::bind(&SceneIngame::onTouchEnded, this, std::placeholders::_1, std::placeholders::_2);
+	//touch->onTouchMoved = std::bind(&SceneIngame::onTouchMoved, this, std::placeholders::_1, std::placeholders::_2);
+	//touch->onTouchEnded = std::bind(&SceneIngame::onTouchEnded, this, std::placeholders::_1, std::placeholders::_2);
 	touch->onTouchCancelled = touch->onTouchEnded;
 
 	getEventDispatcher()->addEventListenerWithSceneGraphPriority(touch,this);
@@ -357,9 +357,9 @@ void SceneIngame::initUI()
 		});
 }
 
-void SceneIngame::destroyUI()
-{
-}
+//void SceneIngame::destroyUI()
+//{
+//}
 
 
 // 게임을 종료할 때 블록과 점수를 초기화하는 함수
@@ -415,27 +415,27 @@ bool SceneIngame::onTouchBegan(Touch* t, Event* e)
 	return true;
 }
 
-void SceneIngame::onTouchMoved(Touch* t, Event* e)
-{
-}
-
-void SceneIngame::onTouchEnded(Touch* t, Event* e)
-{
-}
+//void SceneIngame::onTouchMoved(Touch* t, Event* e)
+//{
+//}
+//
+//void SceneIngame::onTouchEnded(Touch* t, Event* e)
+//{
+//}
 
 void SceneIngame::startGame()
 {
 	Global::getInstance()->playBackgroundMusic();
 }
 
-void SceneIngame::pauseGame()
-{
-}
-
-void SceneIngame::winGame()
-{
-}
-
-void SceneIngame::loseGame()
-{
-}
+//void SceneIngame::pauseGame()
+//{
+//}
+//
+//void SceneIngame::winGame()
+//{
+//}
+//
+//void SceneIngame::loseGame()
+//{
+//}

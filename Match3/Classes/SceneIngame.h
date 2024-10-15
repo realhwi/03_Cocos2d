@@ -79,7 +79,7 @@ public:
 
 	void initUI(); // ui를 만드는 함수 
 	void initGame(); // 게임을 최초 초기화 하는 함수 
-	void destroyUI(); // ui를 삭제하는 함수 
+	//void destroyUI(); // ui를 삭제하는 함수 
 	void destroyGame(); // 게임의 스프라이트 같은 것들을 삭제하는 함수 
 
 	// 모든 블록의 Sprite를 정찰하는 함수
@@ -87,13 +87,13 @@ public:
 	void alignBlockSprite();
 
 	bool onTouchBegan(Touch* t, Event* e); // 터치 시작
-	void onTouchMoved(Touch* t, Event* e); // 터치 이동 
-	void onTouchEnded(Touch* t, Event* e); // 터치 끝날때 
+	//void onTouchMoved(Touch* t, Event* e); // 터치 이동 
+	//void onTouchEnded(Touch* t, Event* e); // 터치 끝날때 
 
 	void startGame(); //시작
-	void pauseGame(); //일시정지
-	void winGame(); //이겼을 때
-	void loseGame(); //졌을 때
+	//void pauseGame(); //일시정지
+	//void winGame(); //이겼을 때
+	//void loseGame(); //졌을 때
 };
 
 

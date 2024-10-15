@@ -21,3 +21,8 @@ Resources/
 !Match3/
 !Match3/Classes/
 !Match3/Classes/**
+
+# TDShooting 폴더와 그 내부의 Classes 폴더와 파일들을 추적
+!TDShooting/
+!TDShooting/Classes/
+!TDShooting/Classes/**
