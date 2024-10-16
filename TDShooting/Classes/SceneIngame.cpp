@@ -1,5 +1,8 @@
 #include "stdafx.h" 
 #include "SceneIngame.h" 
+#include "Bullet.h"
+#include "Unit.h"
+#include "EnemyComponent.h"
 
 SceneIngame* SceneIngame::create()
 {
@@ -20,6 +23,12 @@ bool SceneIngame::init()
 
 	getEventDispatcher()->addEventListenerWithSceneGraphPriority(keybd, this); // 이벤트 리스너를 씬에 추가
 
+	auto contact = EventListenerPhysicsContact::create();	  // 충돌 이벤트 리스너 생성
+	// onContactBegin 이벤트가 발생할 때 호출될 함수로 onContectBegin을 설정
+	contact->onContactBegin = std::bind(&SceneIngame::onContectBegin,this,std::placeholders::_1);
+	// 이벤트 디스패처를 통해 씬에 이벤트 리스너를 추가
+	getEventDispatcher()->addEventListenerWithSceneGraphPriority(contact,this);
+
 	schedule(CC_SCHEDULE_SELECTOR(SceneIngame::logic)); // 일정 시간마다 logic 함수 호출
 
 	return true; // 초기화 성공
@@ -33,14 +42,22 @@ void SceneIngame::onEnter()
 	if (DEBUG_MODE) world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL); // 디버그 모드일 때 물리 디버그 설정
 	world->setGravity(Vec2::ZERO); // 중력 설정 (여기서는 중력 없음)
 
-	player = Node::create(); // 플레이어 노드 생성
-	player->setPosition(Vec2(1280 / 2, 720 / 2)); // 플레이어 위치를 화면 중앙으로 설정
-
-	auto body = PhysicsBody::createBox(Size(75, 75)); // 플레이어의 크기를 설정하고 물리 바디 생성
-	body->setRotationEnable(false); // 회전 불가 설정
-	body->setCollisionBitmask(0); // 충돌 마스크 설정 (충돌 대상 없음)
-	player->addComponent(body); // 플레이어에 물리 바디 추가
+	player = Unit::create(Size(75,75),PLAYER_MASK,TAG_PLAYER); // Unit으로 교체 
+	player->setPosition(Vec2(1280 / 2, 720 /2 -200)); // 플레이어 위치를 화면 중앙으로 설정
 	addChild(player); // 플레이어 노드를 씬에 추가
+
+	auto enemy = Unit::create(Size(75,75),ENEMY_MASK,TAG_ENEMY);
+	// 적 유닛에 NORMAL 타입의 공격 루틴 컴포넌트를 추가
+	enemy->addComponent(EnemyAttackRoutine::create(EnemyAttackType::NORMAL));
+	enemy->setPosition(Vec2(1280/2,720/2+200));
+	addChild(enemy);
+
+}
+
+// 플레이어 객체를 반환하는 함수 구현
+Unit* SceneIngame::getPlayer()
+{
+	return player;
 }
 
 void SceneIngame::onKeyPressed(EventKeyboard::KeyCode c, Event* e)
@@ -69,6 +86,48 @@ void SceneIngame::onKeyRelesed(EventKeyboard::KeyCode c, Event* e)
 	}
 }
 
+bool SceneIngame::onContectBegin(PhysicsContact& contact)
+{
+	// 충돌한 두 물체의 태그(tag)를 가져옴
+	int tagA = contact.getShapeA()->getBody()->getTag();
+	int tagB = contact.getShapeB()->getBody()->getTag();
+
+	// 충돌한 두 물체의 Node(장면에서의 객체)를 가져옴
+	Node* a = contact.getShapeA()->getBody()->getNode();
+	Node* b = contact.getShapeB()->getBody()->getNode();
+
+	// 플레이어의 총알이 적과 충돌한 경우
+	if (tagA == TAG_PLAYER_BULLET && tagB == TAG_ENEMY) {
+		b->removeFromParent();  // 적 객체를 장면에서 제거
+	}
+	if (tagB == TAG_PLAYER_BULLET && tagA == TAG_ENEMY) {
+		a->removeFromParent();  // 적 객체를 장면에서 제거
+	}
+
+	// 플레이어와 적이 충돌한 경우
+	if (tagA == TAG_PLAYER && tagB == TAG_ENEMY) {
+		a->removeFromParent();  // 플레이어 객체를 장면에서 제거
+		player = nullptr;  // 플레이어 포인터를 null로 설정 (플레이어가 없음을 나타냄)
+	}
+	if (tagB == TAG_PLAYER && tagA == TAG_ENEMY) {
+		b->removeFromParent();  // 플레이어 객체를 장면에서 제거
+		player = nullptr;  // 플레이어 포인터를 null로 설정
+	}
+
+	// 플레이어와 적의 총알이 충돌한 경우
+	if (tagA == TAG_PLAYER && tagB == TAG_ENEMY_BULLET) {
+		a->removeFromParent();  // 플레이어 객체를 장면에서 제거
+		player = nullptr;  // 플레이어 포인터를 null로 설정
+	}
+	if (tagB == TAG_PLAYER && tagA == TAG_ENEMY_BULLET) {
+		b->removeFromParent();  // 플레이어 객체를 장면에서 제거
+		player = nullptr;  // 플레이어 포인터를 null로 설정
+	}
+
+	return true;
+}
+
+
 void SceneIngame::logic(float dt)
 {
 	if (!player) return; // 플레이어가 없으면 종료
@@ -84,12 +143,9 @@ void SceneIngame::logic(float dt)
 
 	// 발사 상태일 때 총알 생성
 	if (fire) {
-		auto bullet = Node::create(); // 총알 노드 생성
-		auto body = PhysicsBody::createCircle(5); // 원형의 물리 바디 생성
-		body->setCollisionBitmask(0); // 충돌 마스크 설정 (충돌 대상 없음)
+		auto bullet = Bullet::create(PLAYER_MASK,TAG_PLAYER_BULLET); // 총알 노드 생성
 		bullet->setPosition(player->getPosition()); // 총알 위치를 플레이어 위치로 설정
-		bullet->addComponent(body); // 총알에 물리 바디 추가
-		body->setVelocity(Vec2(0, 1000)); // 총알의 속도 설정 (위 방향)
+		bullet->getBody()->setVelocity(Vec2(0,1000));
 		bullet->runAction(Sequence::create(DelayTime::create(1.0f), RemoveSelf::create(), nullptr)); // 1초 후 총알을 제거
 		addChild(bullet); // 총알을 씬에 추가
 	}
