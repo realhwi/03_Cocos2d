@@ -46,11 +46,29 @@ void SceneIngame::onEnter()
 	player->setPosition(Vec2(1280 / 2, 720 /2 -200)); // 플레이어 위치를 화면 중앙으로 설정
 	addChild(player); // 플레이어 노드를 씬에 추가
 
-	auto enemy = Unit::create(Size(75,75),ENEMY_MASK,TAG_ENEMY);
-	// 적 유닛에 NORMAL 타입의 공격 루틴 컴포넌트를 추가
-	enemy->addComponent(EnemyAttackRoutine::create(EnemyAttackType::NORMAL));
-	enemy->setPosition(Vec2(1280/2,720/2+200));
-	addChild(enemy);
+	{
+		auto enemy = Unit::create(Size(75,75),ENEMY_MASK,TAG_ENEMY);
+		enemy->addComponent(EnemyAttackRoutine::create(EnemyAttackType::NORMAL));
+		enemy->addComponent(EnemyMovementRoutine::create(EnemyMovementType::FROM_TOP));
+		enemy->setPosition(Vec2(1280/2,720/2+200));
+		addChild(enemy);
+	}
+
+	{
+		auto enemy = Unit::create(Size(75, 75), ENEMY_MASK, TAG_ENEMY);
+		enemy->addComponent(EnemyAttackRoutine::create(EnemyAttackType::DOUBLE));
+		enemy->addComponent(EnemyMovementRoutine::create(EnemyMovementType::FROM_LEFT));
+		enemy->setPosition(Vec2(1280 / 2-300, 720 / 2 + 200));
+		addChild(enemy);
+	}
+
+	{
+		auto enemy = Unit::create(Size(75, 75), ENEMY_MASK, TAG_ENEMY);
+		enemy->addComponent(EnemyAttackRoutine::create(EnemyAttackType::TRIPLE));
+		enemy->addComponent(EnemyMovementRoutine::create(EnemyMovementType::FROM_RIGHT));
+		enemy->setPosition(Vec2(1280 / 2+300, 720 / 2 + 200));
+		addChild(enemy);
+	}
 
 }
 

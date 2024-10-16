@@ -23,4 +23,7 @@
 #define TAG_PLAYER_BULLET 3
 #define TAG_ENEMY_BULLET 4
 
+#define PI 3.14159265358
+#define GET_RAD(X) (X * (PI/180.0)) // 360도 각도 계산 
+
 #endif // 헤더 가드 종료
