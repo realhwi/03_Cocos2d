@@ -30,7 +30,7 @@ bool SceneIngame::init()
 	getEventDispatcher()->addEventListenerWithSceneGraphPriority(contact,this);
 
 	schedule(CC_SCHEDULE_SELECTOR(SceneIngame::logic)); // 일정 시간마다 logic 함수 호출
-
+	schedule(CC_SCHEDULE_SELECTOR(SceneIngame::fireLogic),0.1); 
 	return true; // 초기화 성공
 }
 
@@ -42,12 +42,12 @@ void SceneIngame::onEnter()
 	if (DEBUG_MODE) world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL); // 디버그 모드일 때 물리 디버그 설정
 	world->setGravity(Vec2::ZERO); // 중력 설정 (여기서는 중력 없음)
 
-	player = Unit::create(Size(75,75),PLAYER_MASK,TAG_PLAYER); // Unit으로 교체 
+	player = Player::create();
 	player->setPosition(Vec2(1280 / 2, 720 /2 -200)); // 플레이어 위치를 화면 중앙으로 설정
 	addChild(player); // 플레이어 노드를 씬에 추가
 
 	{
-		auto enemy = Unit::create(Size(75,75),ENEMY_MASK,TAG_ENEMY);
+		auto enemy = Enemy::create();
 		enemy->addComponent(EnemyAttackRoutine::create(EnemyAttackType::NORMAL));
 		enemy->addComponent(EnemyMovementRoutine::create(EnemyMovementType::FROM_TOP));
 		enemy->setPosition(Vec2(1280/2,720/2+200));
@@ -55,7 +55,7 @@ void SceneIngame::onEnter()
 	}
 
 	{
-		auto enemy = Unit::create(Size(75, 75), ENEMY_MASK, TAG_ENEMY);
+		auto enemy = Enemy::create();
 		enemy->addComponent(EnemyAttackRoutine::create(EnemyAttackType::DOUBLE));
 		enemy->addComponent(EnemyMovementRoutine::create(EnemyMovementType::FROM_LEFT));
 		enemy->setPosition(Vec2(1280 / 2-300, 720 / 2 + 200));
@@ -63,7 +63,7 @@ void SceneIngame::onEnter()
 	}
 
 	{
-		auto enemy = Unit::create(Size(75, 75), ENEMY_MASK, TAG_ENEMY);
+		auto enemy = Enemy::create();
 		enemy->addComponent(EnemyAttackRoutine::create(EnemyAttackType::TRIPLE));
 		enemy->addComponent(EnemyMovementRoutine::create(EnemyMovementType::FROM_RIGHT));
 		enemy->setPosition(Vec2(1280 / 2+300, 720 / 2 + 200));
@@ -104,6 +104,16 @@ void SceneIngame::onKeyRelesed(EventKeyboard::KeyCode c, Event* e)
 	}
 }
 
+bool SceneIngame::collition(Unit* u, float damage)
+{
+	u->addHP(-damage);
+	if (u->isHPZero()) {
+		u->removeFromParent();
+		return true;
+	}
+	return false;
+}
+
 bool SceneIngame::onContectBegin(PhysicsContact& contact)
 {
 	// 충돌한 두 물체의 태그(tag)를 가져옴
@@ -114,32 +124,41 @@ bool SceneIngame::onContectBegin(PhysicsContact& contact)
 	Node* a = contact.getShapeA()->getBody()->getNode();
 	Node* b = contact.getShapeB()->getBody()->getNode();
 
+	if(a==nullptr) return true;
+	if(b==nullptr) return true;
+
 	// 플레이어의 총알이 적과 충돌한 경우
 	if (tagA == TAG_PLAYER_BULLET && tagB == TAG_ENEMY) {
-		b->removeFromParent();  // 적 객체를 장면에서 제거
+		this->collition((Unit*)b,25);
+		a->removeFromParent();  // 적 객체를 장면에서 제거
 	}
 	if (tagB == TAG_PLAYER_BULLET && tagA == TAG_ENEMY) {
-		a->removeFromParent();  // 적 객체를 장면에서 제거
+		this->collition((Unit*)a, 25);
+		b->removeFromParent();  // 적 객체를 장면에서 제거
 	}
 
 	// 플레이어와 적이 충돌한 경우
 	if (tagA == TAG_PLAYER && tagB == TAG_ENEMY) {
-		a->removeFromParent();  // 플레이어 객체를 장면에서 제거
-		player = nullptr;  // 플레이어 포인터를 null로 설정 (플레이어가 없음을 나타냄)
+		bool dead = this->collition((Unit*)a,50);
+		if(dead) player = nullptr;
+		this->collition((Unit*)b,100);
 	}
 	if (tagB == TAG_PLAYER && tagA == TAG_ENEMY) {
-		b->removeFromParent();  // 플레이어 객체를 장면에서 제거
-		player = nullptr;  // 플레이어 포인터를 null로 설정
+		bool dead = this->collition((Unit*)b, 50);
+		if (dead) player = nullptr;
+		this->collition((Unit*)a, 100);
 	}
 
 	// 플레이어와 적의 총알이 충돌한 경우
 	if (tagA == TAG_PLAYER && tagB == TAG_ENEMY_BULLET) {
-		a->removeFromParent();  // 플레이어 객체를 장면에서 제거
-		player = nullptr;  // 플레이어 포인터를 null로 설정
+		bool dead = this->collition((Unit*)a, 100);
+		if (dead) player = nullptr;
+		b->removeFromParent();
 	}
 	if (tagB == TAG_PLAYER && tagA == TAG_ENEMY_BULLET) {
-		b->removeFromParent();  // 플레이어 객체를 장면에서 제거
-		player = nullptr;  // 플레이어 포인터를 null로 설정
+		bool dead = this->collition((Unit*)b, 100);
+		if (dead) player = nullptr;
+		a->removeFromParent();
 	}
 
 	return true;
@@ -158,12 +177,17 @@ void SceneIngame::logic(float dt)
 	if (right) pos += Vec2(dt * PLAYER_MOVEMENT_SPEED, 0);
 
 	player->setPosition(pos); // 새로운 위치 설정
+}
+
+void SceneIngame::fireLogic(float dt)
+{
+	if (!player) return; // 플레이어가 없으면 종료
 
 	// 발사 상태일 때 총알 생성
 	if (fire) {
-		auto bullet = Bullet::create(PLAYER_MASK,TAG_PLAYER_BULLET); // 총알 노드 생성
-		bullet->setPosition(player->getPosition()); // 총알 위치를 플레이어 위치로 설정
-		bullet->getBody()->setVelocity(Vec2(0,1000));
+		auto bullet = Bullet::create(PLAYER_MASK, TAG_PLAYER_BULLET); // 총알 노드 생성
+		bullet->setPosition(player->getPosition() + Vec2(0,60)); // 총알 위치를 플레이어 위치로 설정
+		bullet->getBody()->setVelocity(Vec2(0, 1000));
 		bullet->runAction(Sequence::create(DelayTime::create(1.0f), RemoveSelf::create(), nullptr)); // 1초 후 총알을 제거
 		addChild(bullet); // 총알을 씬에 추가
 	}

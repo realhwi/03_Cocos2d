@@ -5,6 +5,7 @@
 
 class Bullet : public Node {
 private:
+	Sprite* spr;
 	PhysicsBody* body;
 public:
 	static Bullet* create(int bitmask, int tag);

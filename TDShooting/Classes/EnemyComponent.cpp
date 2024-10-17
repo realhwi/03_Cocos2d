@@ -142,17 +142,20 @@ void EnemyMovementRoutine::update(float dt)
 void EnemyMovementRoutine::logic_from_top(float dt)
 {   
     if(u==nullptr) return;
+    if(u->getBody()==nullptr) return;
     u->getBody()->applyImpulse(Vec2(0,1500).getNormalized() * 1500);
 }
 
 void EnemyMovementRoutine::logic_from_left(float dt)
 {
     if (u == nullptr) return;
+    if (u->getBody() == nullptr) return;
     u->getBody()->applyImpulse(Vec2(-1500, 300).getNormalized() * 1500);
 }
 
 void EnemyMovementRoutine::logic_from_right(float dt)
 {
     if (u == nullptr) return;
+    if (u->getBody() == nullptr) return;
     u->getBody()->applyImpulse(Vec2(1500, 300).getNormalized() * 1500);
 }

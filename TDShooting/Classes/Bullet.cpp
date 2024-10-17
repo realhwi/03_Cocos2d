@@ -19,6 +19,13 @@ bool Bullet::init(int bitmask, int tag)
 	body->setTag(tag);
 	addComponent(body);
 
+	if (tag == TAG_PLAYER_BULLET) {
+		addChild(spr = Sprite::create("res/Lasers/laserBlue16.png"));
+	}
+	if (tag == TAG_ENEMY_BULLET) {
+		addChild(spr = Sprite::create("res/Lasers/laserBlue08.png"));
+		spr->runAction(RepeatForever::create(RotateBy::create(1.0f,80)));
+	}
 	return true;
 }
 
